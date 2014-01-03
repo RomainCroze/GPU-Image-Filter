@@ -1,0 +1,17 @@
+#version 120
+
+// Input
+ 
+varying vec2 coordTexture;
+ 
+ 
+uniform sampler2D texture;
+
+// Function main
+ 
+void main()
+{
+    // Pixel color
+ 
+   	gl_FragColor = texture(texture, coordTexture);
+}

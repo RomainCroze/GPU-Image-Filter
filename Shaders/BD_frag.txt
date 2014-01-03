@@ -1,0 +1,45 @@
+#version 120
+
+// Input
+ 
+varying vec2 coordTexture;
+ 
+ 
+uniform sampler2D texture;
+
+float floorage(float a){
+return floor(a*5)/5;
+}
+// Function main
+ 
+void main()
+{
+vec3 v = vec3(1.0/7.5,1/7.5,1.0/7.5);
+
+  vec4 a = texture2D(texture,coordTexture+vec2(-1.0/1024.0,-1.0/768.0));
+  vec4 b = texture2D(texture,coordTexture+vec2(0.0,-1.0/768.0));
+  vec4 c = texture2D(texture,coordTexture+vec2(1.0/1024.0,-1.0/768.0));
+  vec4 d = texture2D(texture,coordTexture+vec2(-1.0/1024.0,0));
+  vec4 e = texture2D(texture,coordTexture);
+  vec4 f = texture2D(texture,coordTexture+vec2(1.0/1024,0));
+  vec4 g = texture2D(texture,coordTexture+vec2(-1.0/1024.0,1.0/768.0));
+  vec4 h = texture2D(texture,coordTexture+vec2(0.0,1.0/768.0));
+  vec4 i = texture2D(texture,coordTexture+vec2(1.0/1024.0,1.0/768.0));
+
+  mat3 mx = mat3(floorage(a.x),floorage(b.x),floorage(c.x),
+				floorage(d.x),floorage(e.x),floorage(f.x),
+				floorage(g.x),floorage(h.x),floorage(i.x));
+mat3 my = mat3(floorage(a.y),floorage(b.y),floorage(c.y),
+				floorage(d.y),floorage(e.y),floorage(f.y),
+				floorage(g.y),floorage(h.y),floorage(i.y));
+
+mat3 mz = mat3(floorage(a.z),floorage(b.z),floorage(c.z),
+				floorage(d.z),floorage(e.z),floorage(f.z),
+				floorage(g.z),floorage(h.z),floorage(i.z));
+ vec3 wx = mx*v;
+ vec3 wy = my*v;
+ vec3 wz = mz*v;
+  
+gl_FragColor= vec4((wx.x+wx.y+wx.z),(wy.x+wy.y+wy.z),(wz.x+wz.y+wz.z),1.0);
+}
+   	

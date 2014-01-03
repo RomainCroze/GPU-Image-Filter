@@ -1,0 +1,18 @@
+#version 120
+
+//Input
+
+attribute vec2 in_TexCoord;
+attribute vec2 in_Vertex;
+
+// Output data
+varying vec2 coordTexture;
+void main(){
+
+	// Output position
+	gl_Position = vec4(in_Vertex, 0.0, 1.0);
+
+	// Output vertex coord
+coordTexture = in_TexCoord;
+
+}
